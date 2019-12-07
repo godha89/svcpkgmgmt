@@ -1,0 +1,57 @@
+buildscript {
+   ext {
+      springBootVersion = '1.5.8.RELEASE'
+   }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+   }
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.pkg.mgmt'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+   mavenCentral()
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+dependencies {
+   compile('org.springframework.boot:spring-boot-starter-web')
+   
+   testCompile('org.springframework.boot:spring-boot-starter-test')
+   //compile('org.springframework.cloud:spring-cloud-starter-eureka')
+   
+   //compile('org.springframework.boot:spring-boot-starter-actuator')
+   
+    //Monitoring
+   //compile('org.springframework.boot:spring-boot-starter-actuator')
+      compile('org.springframework.boot:spring-boot-starter-hateoas')
+   
+   
+   //Database
+   compile('org.springframework.boot:spring-boot-starter-jdbc')
+   //compile('org.springframework.boot:spring-boot-starter-data-jpa')
+   
+   	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'   
+   //Swagger
+   compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+   compile group: 'org.joda', name: 'joda-money', version: '0.11'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+   
+  
+}
