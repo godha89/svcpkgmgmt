@@ -5,6 +5,14 @@
 To Run the application, follow these steps:
 
 
+1.  Build the Project with following command in command prompt in the project directory
+	gradlew bootRun
+2.  Once build is completed, access the swagger page usingg following url
+	<http://localhost:8761/swagger-ui.html#/package45controller>
+
+3.	I have integrated an embedded H2 database which can be accessed at following url post application startup.
+	<http://localhost:8761/h2>	
+	
 
 
 The REST API endpoints are documented in the Swagger page created for the application and can be accessed at:
