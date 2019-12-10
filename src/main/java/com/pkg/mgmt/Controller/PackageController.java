@@ -13,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.pkg.mgmt.Service.PackageService;
+import com.pkg.mgmt.model.BusinessException;
 import com.pkg.mgmt.model.PackageBean;
 import com.pkg.mgmt.model.PackageMgmtErrorResponse;
 
@@ -33,6 +36,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/package")
+@Transactional
 public class PackageController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PackageController.class);
@@ -46,7 +50,7 @@ public class PackageController {
 	@PostMapping(path = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE, }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<PackageBean> createPackage(@Valid @RequestBody PackageBean packageBean,
-			UriComponentsBuilder ucBuilder) {
+			UriComponentsBuilder ucBuilder) throws BusinessException {
 
 		LOGGER.info("Start Create Package");
 		// Generate Random Package Id.
@@ -63,6 +67,7 @@ public class PackageController {
 
 	}
 
+	@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8761" })
 	@ApiOperation(value = "Fetches details of a package based on packageId", response = PackageBean.class)
 	@GetMapping(path = "/fetchPackage/{id}")
 	public ResponseEntity<?> getPackage(@PathVariable String id,
@@ -105,7 +110,8 @@ public class PackageController {
 
 	@ApiOperation(value = "Update a package based on packageId", response = PackageBean.class)
 	@PutMapping(path = "/updatePackage/{id}")
-	public ResponseEntity<?> updatePackage(@PathVariable String id, @RequestBody PackageBean packageBean) {
+	public ResponseEntity<?> updatePackage(@PathVariable String id, @RequestBody PackageBean packageBean)
+			throws BusinessException {
 		LOGGER.debug("Version 1 input");
 
 		PackageBean existingPackage = packageService.fetchPackage(id);
@@ -125,6 +131,7 @@ public class PackageController {
 		return new ResponseEntity<PackageBean>(existingPackage, HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8761" })
 	@ApiOperation(value = "Fetches list of packages", response = List.class)
 	@GetMapping(path = "/allPackages")
 	public ResponseEntity<List<PackageBean>> getAllPackages(

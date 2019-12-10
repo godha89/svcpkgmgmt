@@ -18,14 +18,6 @@ public class ServiceUtil {
 		return new RestTemplate();
 	}
 
-	// TODO ADD SWAGGER DOCUMENTATION FOR API's
-	/*
-	 * @Bean public Docket productApi() { Docket docket = new
-	 * Docket(DocumentationType.SWAGGER_2).select()
-	 * .apis(RequestHandlerSelectors.basePackage("com.pkg.mgmt.Controller")).build()
-	 * .apiInfo(metaData()); return docket; }
-	 */
-
 	private ApiInfo metaData() {
 		ApiInfo apiInfo = new ApiInfoBuilder().contact(new Contact("Saurabh Godha", "", "godha89@gmail.com"))
 				.description("This Service is used to Manage Pakages").title("Package Management").build();

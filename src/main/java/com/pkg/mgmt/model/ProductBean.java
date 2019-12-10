@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -15,12 +17,12 @@ public class ProductBean implements Serializable {
 	@JsonProperty(value = "id", required = true)
 	private String id;
 
-	@NotNull(message = "Product Name Cannot Be Null")
-	@JsonProperty(value = "name", required = true)
+	// @NotNull(message = "Product Name Cannot Be Null")
+	@JsonProperty(value = "name")
 	private String name;
 
-	@NotNull(message = "Product Price Cannot Be Null")
-	@JsonProperty(value = "usdPrice", required = true)
+	// @NotNull(message = "Product Price Cannot Be Null")
+	@JsonProperty(value = "usdPrice")
 	private BigDecimal usdPrice;
 
 	public ProductBean() {

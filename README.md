@@ -29,7 +29,7 @@ The REST API endpoints are documented in the Swagger page created for the applic
    
 	REST-API: http://localhost:8761/api/package/create   
 	METHOD: POST   
-	REQUEST: `{ "description": "Package Description", "name": "Package Name", "products": [{ "id" : "Product_ID_1", "name" : "Product_NAME_1", "usdPrice" : PRODUCT_AMT_DOUBLE}]}`
+	REQUEST: `{ "description": "Package Description", "name": "Package Name", "products": [{ "id" : "Product_ID_1"}]}`
     
 	RESPONSE: HTTP_STATUS 201 CREATED
 
